@@ -92,10 +92,10 @@
         var format = hasWebp ? 'webp' : 'jpg'
 
         var leftBaseLayers = {
-            'Bing Satellite': L.bingLayer(BING_MAPS_KEY)
+            'Bing Satellite': L.TileLayer.bing(BING_MAPS_KEY)
         }
         var rightBaseLayers = {
-            'Bing Satellite': L.bingLayer(BING_MAPS_KEY).addTo(map)
+            'Bing Satellite': L.TileLayer.bing(BING_MAPS_KEY).addTo(map)
         }
 
         window.satelliteLayers.forEach(function (layer) {
