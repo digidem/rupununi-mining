@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8 />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui' />
+    <title>Secoya Land Invasion</title>
+    <script src='http://cdn.leafletjs.com/leaflet/v1.0.0-beta.2.rc.2/leaflet-src.js'></script>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/leaflet-hash/0.2.1/leaflet-hash.min.js'></script>
+    <script src='http://gmaclennan.github.io/leaflet-bing-layer/leaflet-bing-layer.js'></script>
+    <script src="https://cdn.polyfill.io/v1/polyfill.min.js?features=Promise"></script>
+    <script src="layers.js"></script>
+    <link href='http://cdn.leafletjs.com/leaflet/v1.0.0-beta.2.rc.2/leaflet.css' rel='stylesheet' />
+    <link href='range-input.css' rel='stylesheet' />
+    <style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    #range {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+    }
+    #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+    }
+    #divider {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 4px;
+        background-color: #fff;
+        pointer-events: none;
+        z-index: 999;
+    }
+    *, *:after, *:before {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+    </style>
+</head>
+
+<body>
+    <div id='map'></div>
+    <div id='divider'></div>
+    <form><input id='range' type='range' min='0' max='1.0' step='any' /></form>
+
+    <script>
+    var interestArea = [
+        [2.0996351958176844, -59.29698944091797],
+        [2.350071677293491, -59.00962829589844]
+    ]
+
+    var BING_MAPS_KEY = 'AqAa7FyZoTAvP_O-vFPJi9y8AWm9ElvmvMHqIBglCtdRsZjDqTpKZCccuJiu2Zue'
+
+    // Set max bounds for the map to keep us focussed on the area of interest
+    var southWest = L.latLng(-1, -66),
+        northEast = L.latLng(9, -52),
+        bounds = L.latLngBounds(southWest, northEast);
+
+    var map = L.map('map', {
+        maxBounds: bounds,
+        maxZoom: 20,
+        minZoom: 8
+    }).fitBounds(L.latLngBounds(interestArea)).zoomIn(2);
+
+    map.zoomControl.setPosition('bottomright');
+
+    // Keep the URL updated with a hash of the current position
+    var hash = L.hash(map);
+
+    L.rectangle(interestArea, {color: '#FFC107', weight: 2, fill: false}).addTo(map)
+
+    L.DdLayer = L.TileLayer.extend({
+        initialize: function (options) {
+            var url = 'http://dd-tiles.s3-website-us-east-1.amazonaws.com/' +
+                options.id + '/{z}/{x}/{y}.' + options.format;
+            L.TileLayer.prototype.initialize.call(this, url, options);
+        }
+    })
+
+    var range = document.getElementById('range');
+    var divider = document.getElementById('divider');
+    var overlay
+
+    checkWebpSupport(function(hasWebp) {
+        var format = hasWebp ? 'webp' : 'jpg'
+
+        var leftBaseLayers = {
+            'Bing Satellite': L.bingLayer(BING_MAPS_KEY)
+        }
+        var rightBaseLayers = {
+            'Bing Satellite': L.bingLayer(BING_MAPS_KEY).addTo(map)
+        }
+
+        window.satelliteLayers.forEach(function (layer) {
+            layer.format = format
+            leftBaseLayers[layer.attribution] = new L.DdLayer(layer)
+            rightBaseLayers[layer.attribution] = new L.DdLayer(layer)
+        })
+
+        var leftControl = L.control.layers(leftBaseLayers, {}, {position: 'topleft', collapsed: false}).addTo(map)
+        var rightControl = L.control.layers(rightBaseLayers, {}, {position: 'topright', collapsed: false}).addTo(map)
+
+        map.on('baselayerchange', function (e) {
+            for (var name in leftBaseLayers) {
+                if (e.layer === leftBaseLayers[name]) {
+                    overlay = e.layer
+                    overlay.bringToFront()
+                    clip()
+                }
+            }
+            if (overlay !== e.layer) {
+                e.layer.bringToBack()
+            }
+        })
+
+        leftBaseLayers['Google Skybox 27-Oct-2015'].addTo(map);
+
+        map.on('move', clip);
+        range['oninput' in range ? 'oninput' : 'onchange'] = clip;
+    })
+
+    function clip() {
+        var nw = map.containerPointToLayerPoint([0, 0]),
+            se = map.containerPointToLayerPoint(map.getSize()),
+            offset = (0.5 - range.value) * 44,
+            clipX = nw.x + (se.x - nw.x) * range.value + offset;
+
+        divider.style.left = map.getSize().x * range.value - 2 + offset + 'px';
+        overlay.getContainer().style.clip = 'rect(' + [nw.y, clipX, se.y, nw.x].join('px,') + 'px)';
+    }
+
+    function checkWebpSupport (callback) {
+        var testImage = "UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAARBxAR/Q9ERP8DAABWUDggGAAAABQBAJ0BKgEAAQAAAP4AAA3AAP7mtQAAAA=="
+        var img = new Image();
+        img.onload = function () {
+            var result = (img.width > 0) && (img.height > 0);
+            callback(result);
+        };
+        img.onerror = function () {
+            callback(false);
+        };
+        img.src = "data:image/webp;base64," + testImage;
+    }
+    </script>
+</body>
+</html>
