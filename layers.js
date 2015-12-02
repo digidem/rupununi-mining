@@ -1,26 +1,26 @@
 window.satelliteLayers = [
   {
-    attribution: 'NASA Landsat 8 20-Aug-2013',
+    title: '2013-08-20 (Landsat 8)',
     id: 'LC82310582013216LGN00'
   },
   {
-    attribution: 'NASA Landsat 8 24-Sep-2014',
+    title: '2014-09-24 (Landsat 8)',
     id: 'LC82310582014267LGN00'
   },
   {
-    attribution: 'NASA Landsat 8 11-Sep-2015',
-    id: 'LC82310582015254LGN00'
-  },
-  {
-    attribution: 'Google Skybox 24-Aug-2015',
+    title: '2015-08-24 (Skybox)',
     id: 's01_20150824T144508Z'
   },
   {
-    attribution: 'Google Skybox 09-Sep-2015',
+    title: '2015-09-10 (Skybox)',
     id: 's02_20150910T142516Z'
   },
   {
-    attribution: 'Google Skybox 27-Oct-2015',
+    title: '2015-09-11 (Landsat 8)',
+    id: 'LC82310582015254LGN00'
+  },
+  {
+    title: '2015-10-27 (Skybox)',
     id: 's01_20151027T145451Z'
   }
 ]

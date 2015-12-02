@@ -100,8 +100,8 @@
 
         window.satelliteLayers.forEach(function (layer) {
             layer.format = format
-            leftBaseLayers[layer.attribution] = new L.DdLayer(layer)
-            rightBaseLayers[layer.attribution] = new L.DdLayer(layer)
+            leftBaseLayers[layer.title] = new L.DdLayer(layer)
+            rightBaseLayers[layer.title] = new L.DdLayer(layer)
         })
 
         var leftControl = L.control.layers(leftBaseLayers, {}, {position: 'topleft', collapsed: false}).addTo(map)
@@ -120,7 +120,7 @@
             }
         })
 
-        leftBaseLayers['Google Skybox 27-Oct-2015'].addTo(map);
+        leftBaseLayers['2015-10-27 (Skybox)'].addTo(map);
 
         map.on('move', clip);
         range['oninput' in range ? 'oninput' : 'onchange'] = clip;
