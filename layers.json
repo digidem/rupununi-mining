@@ -1,0 +1,40 @@
+[
+  {
+    "attribution": "Bing Maps",
+    "date": "2012-08-20",
+    "id": "bing"
+  },
+  {
+    "attribution": "NASA Landsat 8",
+    "date": "2013-08-20",
+    "id": "LC82310582013216LGN00",
+    "maxNativeZoom": 15
+  },
+  {
+    "attribution": "NASA Landsat 8",
+    "date": "2014-09-24",
+    "id": "LC82310582014267LGN00",
+    "maxNativeZoom": 15
+  },
+  {
+    "attribution": "Google Skybox",
+    "date": "2015-08-24",
+    "id": "s01_20150824T144508Z"
+  },
+  {
+    "attribution": "Google Skybox",
+    "date": "2015-09-10",
+    "id": "s02_20150910T142516Z"
+  },
+  {
+    "attribution": "NASA Landsat 8",
+    "date": "2015-09-11",
+    "id": "LC82310582015254LGN00",
+    "maxNativeZoom": 15
+  },
+  {
+    "attribution": "Google Skybox",
+    "date": "2015-10-27",
+    "id": "s01_20151027T145451Z"
+  }
+]
