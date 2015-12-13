@@ -1,0 +1,11 @@
+CACHE MANIFEST
+#v4
+http://cdn.leafletjs.com/leaflet/v1.0.0-beta.2/leaflet.css
+https://fonts.gstatic.com/s/oswald/v10/_P8jt3Y65hJ9c4AzRE0V1OvvDin1pK8aKteLpeZ5c0A.woff2
+https://fonts.gstatic.com/s/oswald/v10/HqHm7BVC_nzzTui2lzQTDZBw1xU1rKptJj_0jans920.woff2
+https://fonts.gstatic.com/s/oswald/v10/bH7276GfdCjMjApa_dkG6ZBw1xU1rKptJj_0jans920.woff2
+/images/toggle.svg
+/images/fullscreen.png
+/images/checkbox-sprite.svg
+NETWORK:
+*

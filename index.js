@@ -15,6 +15,10 @@ var LayerControl = require('./layer-control')
 var layerDefs = require('./layers.json')
 var formatRelativeName = require('./formats').formatRelativeName
 var formatName = require('./formats').formatName
+var ImageCache = require('image-cache')
+var drop = require('./drag-drop')
+
+ImageCache.Observer()
 
 var interestArea = [
   [2.115, -59.28],
@@ -29,6 +33,8 @@ var map = global.map = L.map('map', {
   zoomControl: false
 }).fitBounds(bounds)
 map.attributionControl.setPrefix()
+
+drop(map._container)
 
 // Keep the URL updated with a hash of the current position
 L.hash(map)
