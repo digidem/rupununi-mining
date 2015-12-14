@@ -19,7 +19,7 @@ var DdTileLayer = L.TileLayer.extend({
 module.exports = function (options) {
   options = assign({}, options)
   if (options.id === 'bing') {
-    options.BingMapsKey = BING_MAPS_KEY
+    options.bingMapsKey = BING_MAPS_KEY
     return new BingLayer(options)
   }
   return new DdTileLayer(options)

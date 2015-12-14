@@ -4,10 +4,13 @@
   "description": "Gregor MacLennan",
   "main": "index.js",
   "scripts": {
-    "build": "browserify index.js > bundle.js",
+    "build": "browserify web.js > bundle.js",
+    "package-win": "electron-packager . 'Rupununi Mining' --out=dist/ --platform=win32 --arch=ia32 --version=0.36.0 --ignore=^dist --prune --overwrite --asar",
+    "package-mac": "electron-packager . 'Rupununi Mining' --out=dist/ --platform=darwin --arch=x64 --version=0.36.0 --ignore=^dist --prune --overwrite",
     "preversion": "npm test && npm run build",
+    "postinstall": "browserify node_modules/leaflet-side-by-side/index.js > lib/leaflet-side-by-side.js",
     "lint": "standard index.js",
-    "start": "budo index.js:bundle.js --live",
+    "start": "budo web.js:bundle.js --live",
     "test": "npm run lint"
   },
   "repository": {
@@ -21,15 +24,16 @@
   },
   "homepage": "https://github.com/digidem/rupununi-mining#readme",
   "dependencies": {
-    "drag-and-drop-files": "0.0.1",
+    "drag-drop": "^2.3.1",
     "filereader-stream": "^1.0.0",
+    "fs-blob-store": "gmaclennan/fs-blob-store#patch-1",
     "gunzip-maybe": "^1.2.1",
+    "image-cache": "digidem/html5-image-cache#idb-blob-store",
     "leaflet": "^1.0.0-beta.2",
-    "leaflet-bing-layer": "^2.0.2",
+    "leaflet-bing-layer": "^3.0.1",
     "leaflet-fullscreen": "0.0.4",
     "leaflet-hash": "^0.2.1",
     "leaflet-minimap": "github:gmaclennan/leaflet-minimap",
-    "leaflet-side-by-side": "^2.0.0",
     "lodash.debounce": "^3.1.1",
     "lodash.find": "^3.2.1",
     "lodash.pluck": "^3.1.2",
@@ -44,6 +48,9 @@
   "devDependencies": {
     "browserify": "^12.0.1",
     "budo": "^7.0.1",
+    "electron-packager": "^5.1.1",
+    "electron-prebuilt": "^0.36.0",
+    "leaflet-side-by-side": "^2.0.0",
     "standard": "^5.4.1"
   }
 }
