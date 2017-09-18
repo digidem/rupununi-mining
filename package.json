@@ -21,9 +21,9 @@
   },
   "homepage": "https://github.com/digidem/rupununi-mining#readme",
   "dependencies": {
-    "leaflet": "^1.0.0-beta.2",
-    "leaflet-bing-layer": "^2.0.2",
+    "leaflet": "1.0.0-beta.2",
     "leaflet-fullscreen": "0.0.4",
+    "leaflet-bing-layer": "^3.2.0",
     "leaflet-hash": "^0.2.1",
     "leaflet-minimap": "github:gmaclennan/leaflet-minimap",
     "leaflet-side-by-side": "^2.0.0",
@@ -31,14 +31,14 @@
     "lodash.find": "^3.2.1",
     "lodash.pluck": "^3.1.2",
     "lodash.values": "^3.0.0",
-    "moment": "^2.10.6",
-    "object-assign": "^4.0.1",
-    "relative-date": "^1.1.2",
-    "title-case": "^1.1.1"
+    "moment": "^2.18.1",
+    "object-assign": "^4.1.1",
+    "relative-date": "^1.1.3",
+    "title-case": "^1.1.2"
   },
   "devDependencies": {
-    "browserify": "^12.0.1",
-    "budo": "^7.0.1",
+    "browserify": "^12.0.2",
+    "budo": "^7.1.0",
     "standard": "^5.4.1"
   }
 }

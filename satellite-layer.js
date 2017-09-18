@@ -9,7 +9,7 @@ var BING_MAPS_KEY = 'AqAa7FyZoTAvP_O-vFPJi9y8AWm9ElvmvMHqIBglCtdRsZjDqTpKZCccuJi
 var DdTileLayer = L.TileLayer.extend({
   initialize: function (options) {
     var r = L.Browser.retina ? '@2x' : ''
-    var url = 'http://s3.amazonaws.com/dd-tiles/' +
+    var url = 'https://s3.amazonaws.com/dd-tiles/' +
       options.id + '/{z}/{x}/{y}' + r + '.jpg'
     this.options.errorTileUrl = ERROR_TILE
     L.TileLayer.prototype.initialize.call(this, url, options)
@@ -19,7 +19,7 @@ var DdTileLayer = L.TileLayer.extend({
 module.exports = function (options) {
   options = assign({}, options)
   if (options.id === 'bing') {
-    options.BingMapsKey = BING_MAPS_KEY
+    options.bingMapsKey = BING_MAPS_KEY
     return new BingLayer(options)
   }
   return new DdTileLayer(options)
