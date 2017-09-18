@@ -86,7 +86,7 @@ var rightControl = new LayerControl(rightLayers, {side: 'right'}).addTo(map)
 L.control.zoom({position: 'topright'}).addTo(map)
 L.control.fullscreen({position: 'topright'}).addTo(map)
 
-var mapboxUrl = 'https://api.tiles.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}@2x.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6IlhHVkZmaW8ifQ.hAMX5hSW-QnTeRCMAy9A8Q'
+var mapboxUrl = 'https://api.tiles.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}@2x.png?access_token=pk.eyJ1IjoiZ21hY2xlbm5hbiIsImEiOiJSaWVtd2lRIn0.ASYMZE2HhwkAw4Vt7SavEg'
 var mapboxLayer = new L.TileLayer(mapboxUrl, {minZoom: 3, maxZoom: 18})
 if (map.getSize().x > 600) {
   new MiniMap(mapboxLayer, {
